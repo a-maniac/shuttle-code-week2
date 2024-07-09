@@ -1,6 +1,8 @@
 package com.example.SpringMVC.controllers;
 
 import com.example.SpringMVC.dto.EmployeeDto;
+import com.example.SpringMVC.entities.EmployeeEntity;
+import com.example.SpringMVC.repositories.EmployeeRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -11,6 +13,12 @@ import java.util.List;
 @RequestMapping(path = "/employee")
 public class EmployeeController {
 
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
     @GetMapping(path = "/")
     public String getMySuperSecretMessage(){
         return "The secret msg is : ajsdhajd@232knda";
@@ -20,12 +28,13 @@ public class EmployeeController {
     // we can define name as name inside Path variable, or we can keep same parameter name of requested parameter and param
     // defined inside the function.
     //public EmployeeDto getEmployeeByID(@PathVariable(name="id") Long id){
-    public EmployeeDto getEmployeeByID(@PathVariable Long id){
-        return new EmployeeDto("Aman","ajoshi@gmail.com",1L,25, LocalDate.of(2022,8,22),true);
+    public EmployeeEntity getEmployeeByID(@PathVariable Long id){
+        return employeeRepository.findById(id).orElse(null);
+        //return new EmployeeDto("Aman","ajoshi@gmail.com",1L,25, LocalDate.of(2022,8,22),true);
     }
 
     @GetMapping(path="/findAllEmployee")
-    public List<EmployeeDto> findAllEmployee(@RequestParam(required = false) String age){
+    public List<EmployeeEntity> findAllEmployee(@RequestParam(required = false) String age){
 
         List<EmployeeDto> employeeDtoList=new ArrayList<>();
         EmployeeDto firstEmployee=new EmployeeDto();
@@ -47,14 +56,12 @@ public class EmployeeController {
         employeeDtoList.add(firstEmployee);
         employeeDtoList.add(secondEmployee);
 
-        return employeeDtoList;
-
+        return employeeRepository.findAll();
 
     }
 
     @PostMapping
-    public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto){
-        employeeDto.setId(2L);
-        return employeeDto;
+    public EmployeeEntity createEmployee(@RequestBody EmployeeEntity employeeDto){
+        return employeeRepository.save(employeeDto);
     }
 }
