@@ -4,10 +4,12 @@ import com.example.SpringMVC.dto.EmployeeDto;
 import com.example.SpringMVC.entities.EmployeeEntity;
 import com.example.SpringMVC.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class EmployeeService {
 
     public final EmployeeRepository employeeRepository;
