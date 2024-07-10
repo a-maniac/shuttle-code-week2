@@ -1,5 +1,6 @@
 package com.example.SpringMVC.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,8 @@ public class EmployeeDto {
     private Long id;
     private Integer age;
     private LocalDate dateOfJoining;
+    //using @JsonProperty because using serialization and deserialization
+    //it takes is as default and then it will show only active@JsonProperty("isActive")
     private Boolean isActive;
 
     public EmployeeDto(){

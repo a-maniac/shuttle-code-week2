@@ -1,18 +1,15 @@
 package com.example.SpringMVC.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name="Employee")
 public class EmployeeEntity {
 
@@ -23,6 +20,9 @@ public class EmployeeEntity {
     private String email;
     private Integer age;
     private LocalDate dateOfJoining;
+    //using @JsonProperty because using serialization and deserialization
+    //it takes is as default and then it will show only active
+    @JsonProperty("isActive")
     private Boolean isActive;
 
 }
