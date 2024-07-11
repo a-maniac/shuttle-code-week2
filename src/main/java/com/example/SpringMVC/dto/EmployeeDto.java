@@ -1,6 +1,7 @@
 package com.example.SpringMVC.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,6 +16,7 @@ public class EmployeeDto {
     @NotBlank(message = "null name")
     @Size(min=3, max=10, message = "no of character should be in range :[3,10]")
     private String name;
+    @Email
     private String email;
     private Long id;
     private Integer age;
