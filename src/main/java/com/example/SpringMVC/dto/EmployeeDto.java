@@ -1,11 +1,9 @@
 package com.example.SpringMVC.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.aspectj.lang.annotation.DeclareMixin;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -19,7 +17,13 @@ public class EmployeeDto {
     @Email
     private String email;
     private Long id;
+
+    @Max(value = 80,message = "Age of Employee cannot be more than 80")
+    @Min(value=18, message = "Age of Employee cannot be less than 18")
     private Integer age;
+
+    @Pattern(regexp = "^(ADMIN|USER)$",message ="Role of Employee can be Admin or User")
+    private String role; // ADMIN , USER
     private LocalDate dateOfJoining;
     //using @JsonProperty because using serialization and deserialization
     //it takes is as default and then it will show only active@JsonProperty("isActive")
