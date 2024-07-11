@@ -25,6 +25,6 @@ public class EmployeeEntity {
     //it takes is as default and then it will show only active
     @JsonProperty("isActive")
     private Boolean isActive;
-    private Integer salary;
+    private Double salary;
 
 }

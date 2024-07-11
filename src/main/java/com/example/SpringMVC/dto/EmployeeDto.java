@@ -30,10 +30,15 @@ public class EmployeeDto {
     private LocalDate dateOfJoining;
     //using @JsonProperty because using serialization and deserialization
     //it takes is as default and then it will show only active@JsonProperty("isActive")
+    @AssertTrue(message = "Employee should be active")
     private Boolean isActive;
 
+    @NotNull(message = "salary cannot be null")
     @Positive(message = "Salary cannot be negative")
-    private Integer salary;
+    @Digits(integer =6,fraction = 2, message = "decimal cannot be more than 2")
+    @DecimalMax(value="100000.99")
+    @DecimalMin(value="100.50")
+    private Double salary;
 
     public EmployeeDto(){
         
