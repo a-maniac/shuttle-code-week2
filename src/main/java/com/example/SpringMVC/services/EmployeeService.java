@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,10 +26,12 @@ public class EmployeeService {
         this.modelMapper=modelMapper;
     }
     //we are using model mapper dependency to return a DTO not an entity
-    public EmployeeDto getEmployeeByID(Long id) {
-        EmployeeEntity employeeEntity= employeeRepository.findById(id).orElse(null);
+    public Optional<EmployeeDto> getEmployeeByID(Long id) {
+//        Optional<EmployeeEntity> employeeEntity= employeeRepository.findById(id).get();
+//
+//        return modelMapper.map(employeeEntity,EmployeeDto.class);
 
-        return modelMapper.map(employeeEntity,EmployeeDto.class);
+        return employeeRepository.findById(id).map(abc->modelMapper.map(abc,EmployeeDto.class));
 
     }
 
