@@ -22,12 +22,18 @@ public class EmployeeDto {
     @Min(value=18, message = "Age of Employee cannot be less than 18")
     private Integer age;
 
+    @NotBlank(message ="Role of employee cannot be blank")
     @Pattern(regexp = "^(ADMIN|USER)$",message ="Role of Employee can be Admin or User")
     private String role; // ADMIN , USER
+
+    @Past(message = "Date of joining cannot be in future")
     private LocalDate dateOfJoining;
     //using @JsonProperty because using serialization and deserialization
     //it takes is as default and then it will show only active@JsonProperty("isActive")
     private Boolean isActive;
+
+    @Positive(message = "Salary cannot be negative")
+    private Integer salary;
 
     public EmployeeDto(){
         

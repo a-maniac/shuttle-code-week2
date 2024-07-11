@@ -20,9 +20,11 @@ public class EmployeeEntity {
     private String email;
     private Integer age;
     private LocalDate dateOfJoining;
+    private String role;
     //using @JsonProperty because using serialization and deserialization
     //it takes is as default and then it will show only active
     @JsonProperty("isActive")
     private Boolean isActive;
+    private Integer salary;
 
 }
