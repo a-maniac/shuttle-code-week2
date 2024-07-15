@@ -2,9 +2,11 @@ package com.example.SpringMVC.services;
 
 import com.example.SpringMVC.dto.EmployeeDto;
 import com.example.SpringMVC.entities.EmployeeEntity;
+import com.example.SpringMVC.exceptions.ResourceNotFoundException;
 import com.example.SpringMVC.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -49,6 +51,7 @@ public class EmployeeService {
 
     public EmployeeDto updateEmployee(EmployeeDto employeeDto, Long id) {
 
+        if(ObjectUtils.isEmpty(employeeRepository.findById(id))) throw new ResourceNotFoundException("EmployeeNotfound");
         EmployeeEntity employeeEntity=modelMapper.map(employeeDto,EmployeeEntity.class);
         employeeEntity.setId(id);
         EmployeeEntity savedEmployee =employeeRepository.save(employeeEntity);
