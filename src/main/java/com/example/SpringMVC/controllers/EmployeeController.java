@@ -2,6 +2,7 @@ package com.example.SpringMVC.controllers;
 
 import com.example.SpringMVC.dto.EmployeeDto;
 import com.example.SpringMVC.entities.EmployeeEntity;
+import com.example.SpringMVC.exceptions.ResourceNotFoundException;
 import com.example.SpringMVC.repositories.EmployeeRepository;
 import com.example.SpringMVC.services.EmployeeService;
 import jakarta.validation.Valid;
@@ -36,7 +37,7 @@ public class EmployeeController {
         Optional<EmployeeDto> employeeDto= employeeService.getEmployeeByID(id);
         return employeeDto.
                 map(employeeDto1 -> ResponseEntity.ok(employeeDto1))
-                .orElseThrow(()-> new NoSuchElementException("Employee not found"));
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not found"));
         //.orElse(ResponseEntity.notFound().build());
         //return new EmployeeDto("Aman","ajoshi@gmail.com",1L,25, LocalDate.of(2022,8,22),true);
     }
