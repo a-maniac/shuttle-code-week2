@@ -41,11 +41,7 @@ public class EmployeeController {
         //return new EmployeeDto("Aman","ajoshi@gmail.com",1L,25, LocalDate.of(2022,8,22),true);
     }
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> handleEmployeeNotFound(){
-        return new ResponseEntity<>("Employee not found",HttpStatus.NOT_FOUND);
 
-    }
 
     @GetMapping(path="/findAllEmployee")
     public ResponseEntity<List<EmployeeDto>> findAllEmployee(@RequestParam(required = false) String age){
