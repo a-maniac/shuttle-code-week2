@@ -42,8 +42,8 @@ public class EmployeeController {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public String handleEmployeeNotFound(){
-        return "Employee not found";
+    public ResponseEntity<String> handleEmployeeNotFound(){
+        return new ResponseEntity<>("Employee not found",HttpStatus.NOT_FOUND);
 
     }
 
