@@ -1,6 +1,8 @@
 package com.example.SpringMVC.dto;
 
 import com.example.SpringMVC.annotations.EmployeeRoleValidation;
+import com.example.SpringMVC.annotations.Password;
+import com.example.SpringMVC.annotations.PrimeNumberValidation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class EmployeeDto {
 
     @Max(value = 80,message = "Age of Employee cannot be more than 80")
     @Min(value=18, message = "Age of Employee cannot be less than 18")
+    @PrimeNumberValidation  (message = "Age is not a prime number")
     private Integer age;
 
     @NotBlank(message ="Role of employee cannot be blank")
@@ -41,6 +44,10 @@ public class EmployeeDto {
     @DecimalMax(value="100000.99")
     @DecimalMin(value="100.50")
     private Double salary;
+
+    @Password
+    private String password;
+
 
     public EmployeeDto(){
         
