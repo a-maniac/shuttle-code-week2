@@ -34,8 +34,17 @@ public class EmployeeController {
     //public EmployeeDto getEmployeeByID(@PathVariable(name="id") Long id){
     public ResponseEntity<EmployeeDto> getEmployeeByID(@PathVariable Long id){
         Optional<EmployeeDto> employeeDto= employeeService.getEmployeeByID(id);
-        return employeeDto.map(employeeDto1 -> ResponseEntity.ok(employeeDto1)).orElse(ResponseEntity.notFound().build());
+        return employeeDto.
+                map(employeeDto1 -> ResponseEntity.ok(employeeDto1))
+                .orElseThrow(()-> new NoSuchElementException("Employee not found"));
+        //.orElse(ResponseEntity.notFound().build());
         //return new EmployeeDto("Aman","ajoshi@gmail.com",1L,25, LocalDate.of(2022,8,22),true);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public String handleEmployeeNotFound(){
+        return "Employee not found";
+
     }
 
     @GetMapping(path="/findAllEmployee")
