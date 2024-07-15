@@ -1,5 +1,6 @@
 package com.example.SpringMVC.dto;
 
+import com.example.SpringMVC.annotations.EmployeeRoleValidation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -23,7 +24,8 @@ public class EmployeeDto {
     private Integer age;
 
     @NotBlank(message ="Role of employee cannot be blank")
-    @Pattern(regexp = "^(ADMIN|USER)$",message ="Role of Employee can be Admin or User")
+    //@Pattern(regexp = "^(ADMIN|USER)$",message ="Role of Employee can be Admin or User")
+    @EmployeeRoleValidation //custom annotation
     private String role; // ADMIN , USER
 
     @Past(message = "Date of joining cannot be in future")
